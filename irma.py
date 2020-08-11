@@ -45,6 +45,7 @@ def irma():
     t.setpos(-30.3, 16.4)
     t.showturtle()
     t.pendown()
+    font = 20
     
     
     hurricaneFile = "data/irma.csv"
@@ -71,11 +72,41 @@ def irma():
             # row in the file.
             # Make sure you understand what is happening here.
             # Then, you'll need to change this code
+            cCheck = categoryCheck(float(row[4]))
+
+            if (cCheck == 0):
+                t.pencolor("white")
+                t.pensize(1)
+            elif (cCheck == 1):
+                t.pencolor("blue")
+                t.write("1", False, align="center")
+                t.pensize(2)
+                
+            elif (cCheck == 2):
+                t.pencolor("green")
+                t.write("2", False, align="center")
+                t.pensize(4)
+                
+            elif (cCheck == 3):
+                t.pencolor("yellow")
+                t.write("3", False, align="center")
+                t.pensize(6)
+               
+            elif (cCheck == 4):
+                t.pencolor("orange")
+                t.write("4", False, align="center")
+                t.pensize(8)
+                
+            elif (cCheck == 5):
+                t.pencolor("red")
+                t.write("5", False, align="center")
+                t.pensize(11)
+                
             
             t.setpos(float(row[3]),float(row[2]))  
+            t.pensize(2)
              
-            
-    
+              
 
             print("Date:", row[0], "Time:", row[1])
 
@@ -86,17 +117,19 @@ def irma():
     return map_bg_img
 
 def categoryCheck(windSpeed):
-    if(windSpeed < 33):
+    """ returns a hurricane category number based on wind speed """
+
+    if(windSpeed < 74):
         return 0
-    elif (33 <= windSpeed < 43):
+    elif (74 <= windSpeed < 96):
         return 1
-    elif (43 <= windSpeed < 50):
+    elif (96 <= windSpeed < 111):
         return 2
-    elif (50 <= windSpeed < 58):
+    elif (111 <= windSpeed < 130):
         return 3
-    elif (58 <= windSpeed < 70):
+    elif (130 <= windSpeed < 157):
         return 4
-    elif (windSpeed > 70):
+    elif (windSpeed >= 157):
         return 5
         
 
@@ -107,3 +140,15 @@ def categoryCheck(windSpeed):
 if __name__ == "__main__":
     bg=irma()
 
+""" 
+
+for replit testing
+
+def infinity():
+    while 1 == 1:  
+        turtle.forward(100)
+        turtle.backward(100)
+
+infinity() 
+
+"""
