@@ -40,15 +40,9 @@ def irma():
     # Do not change this line
     # t is the turtle, and you will not need the other variables
     (t, wn, map_bg_img) = irma_setup()
-    t.hideturtle()
-    t.penup()
-    t.setpos(-30.3, 16.4)
-    t.showturtle()
-    t.pendown()
-    font = 20
+   
     
-    
-    hurricaneFile = "data/irma.csv"
+    hurricaneFile = "data/franklin.csv"
     # The line below is a little magical. It opens the file,
     # with awareness of any errors that might occur.
     with open(hurricaneFile, 'r') as csvfile:
@@ -63,7 +57,19 @@ def irma():
         # look into Python's built-in next function
         #(https://docs.python.org/3/library/functions.html#next)
         # pointreader is an iterator
+
         next(pointreader)
+
+        # Moves the turtle to start of hurricane. In seperate for loop to reduce overhead. Couldn't figure out how to read csv file without for loop.
+        for row in pointreader:
+            t.hideturtle()
+            t.penup()
+            t.setpos(float(row[3]),float(row[2])) 
+            t.showturtle()
+            t.pendown()
+            print("Date:", row[0], "Time:", row[1])   
+            break
+        
 
         for row in pointreader:
             # row is a list representing each line in the csv file
@@ -74,6 +80,8 @@ def irma():
             # Then, you'll need to change this code
             cCheck = categoryCheck(float(row[4]))
 
+
+            #executes based on category of the hurricane
             if (cCheck == 0):
                 t.pencolor("white")
                 t.pensize(1)
@@ -102,10 +110,11 @@ def irma():
                 t.write("5", False, align="center")
                 t.pensize(11)
                 
-            
+            # Hurricane tracing
             t.setpos(float(row[3]),float(row[2]))  
+
+            #defaulting pensize for writing numbers
             t.pensize(2)
-             
               
 
             print("Date:", row[0], "Time:", row[1])
