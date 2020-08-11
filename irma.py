@@ -42,7 +42,7 @@ def irma():
     (t, wn, map_bg_img) = irma_setup()
    
     
-    hurricaneFile = "data/franklin.csv"
+    hurricaneFile = "data/irma.csv"
     # The line below is a little magical. It opens the file,
     # with awareness of any errors that might occur.
     with open(hurricaneFile, 'r') as csvfile:
